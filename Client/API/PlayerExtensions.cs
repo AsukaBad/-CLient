@@ -6,7 +6,7 @@ using VRC.Core;
 using VRC.SDKBase;
 using VRC.UI;
 
-namespace StarlightLagger
+namespace Client
 {
     internal static class PlayerExtensions
     {

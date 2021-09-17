@@ -478,9 +478,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\PlayerExtensions.cs" />
+    <Compile Include="API\VRChatAPIObjects.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Modules\TEST.cs" />
+    <Compile Include="Modules\Fly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="API\RubyButtonAPI.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
