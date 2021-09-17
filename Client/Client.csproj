@@ -178,6 +178,9 @@
     <Reference Include="MelonLoader">
       <HintPath>D:\Documents\Not\VRChat\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>D:\Documents\Not\VRChat\MelonLoader\Managed\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Oculus.Platform">
       <HintPath>D:\Documents\Not\VRChat\MelonLoader\Managed\Oculus.Platform.dll</HintPath>
     </Reference>
