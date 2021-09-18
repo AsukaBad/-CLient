@@ -7,6 +7,7 @@ using UnhollowerBaseLib;
 using UnityEngine;
 using VRC.SDKBase;
 using MelonLoader;
+using Client.API;
 
 namespace Client.Modules
 {

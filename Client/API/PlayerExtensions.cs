@@ -6,7 +6,7 @@ using VRC.Core;
 using VRC.SDKBase;
 using VRC.UI;
 
-namespace Client
+namespace Client.API
 {
     internal static class PlayerExtensions
     {

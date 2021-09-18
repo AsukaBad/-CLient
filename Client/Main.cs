@@ -26,15 +26,18 @@ using System.IO;
 using Microsoft.Win32;
 using System.Net;
 using Newtonsoft.Json;
-
-
+using Client.API;
+using System.Collections;
 
 namespace Client
 {
     public class Main : MelonMod
     {
+
+        public static List<ClientAPI> Mods = new List<ClientAPI>();
+
         // we have to get our auth server. we don't have it now. or use github? idk how
-        
+
         //private class VersionApi
         //{
         //  public string Version { get; set; }
@@ -44,9 +47,18 @@ namespace Client
 
         // private string Version = "1.0.0";
 
-
         public override void OnApplicationStart()
         {
+
+            Mods.Add(new VRCMinus());
+            Mods.Add(new JoinNotifier());
+
+            foreach (ClientAPI mod in Mods)
+            {
+                ClientLogger.Log($"{mod.ModName} loaded!");
+                mod.OnEarlierStart();
+            }
+
             //  using (WebClient wc = new WebClient())
             //  {
             //
@@ -62,18 +74,71 @@ namespace Client
             //      }
             //  }
 
+            ClientLogger.Init();
+            // the test one
+            ClientLogger.Log("the test ");
+
+            MelonCoroutines.Start(CheckUIManager());
 
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("      ____  _     _  ____  __  _  _____ \n    / (__`| |__ | || ===||   | ||_   _|\n     ____)|____||_||____||_| __|  |_|  ");
             Console.ResetColor();
 
-            // why ClassInjector makes Error ???? "System.NullReferenceException:"
-            ClassInjector.RegisterTypeInIl2Cpp<Say>();
-            ClassInjector.RegisterTypeInIl2Cpp<Fly>();
-            // I want to separate cs for each function. keafy......
-
             Console.WriteLine("Client Loaded");
 
+
+        }
+
+
+
+        private void NetworkManagerHooks_OnJoin(VRC.Player player)
+        {
+            foreach (ClientAPI mod in Mods)
+                mod.OnPlayerJoin(player);
+        }
+
+        private void NetworkManagerHooks_OnLeave(VRC.Player player)
+        {
+            foreach (ClientAPI mod in Mods)
+                mod.OnPlayerLeave(player);
+        }
+
+        private IEnumerator CheckUIManager()
+        {
+            while (VRCUiManager.prop_VRCUiManager_0 == null) { yield return null; }
+            foreach (ClientAPI mod in Mods)
+            mod.OnStart();
+        }
+          
+
+        public override void OnUpdate()
+        {
+            foreach (ClientAPI mod in Mods)
+                mod.OnUpdate();
+        }
+
+        public override void OnLateUpdate()
+        {
+            foreach (ClientAPI mod in Mods)
+                mod.OnLateUpdate();
+        }
+
+        public override void OnFixedUpdate()
+        {
+            foreach (ClientAPI mod in Mods)
+                mod.OnFixedUpdate();
+        }
+
+        public override void OnGUI()
+        {
+            foreach (ClientAPI mod in Mods)
+                mod.OnGUI();
+        }
+
+        public override void OnApplicationQuit()
+        {
+            foreach (ClientAPI mod in Mods)
+                mod.OnQuit();
         }
 
     }

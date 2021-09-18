@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using VRC.Core;
 
-namespace Client
+namespace Client.API
 {
     public class Platforms
     {
