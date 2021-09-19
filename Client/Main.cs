@@ -49,16 +49,7 @@ namespace Client
 
         public override void OnApplicationStart()
         {
-            Mods.Add(new JoinNotifier());
-            Mods.Add(new Fly());
-            Mods.Add(new Say());
 
-
-            foreach (ClientAPI mod in Mods)
-            {
-                ClientLogger.Log($"{mod.ModName} loaded!");
-                mod.OnEarlierStart();
-            }
 
             //  using (WebClient wc = new WebClient())
             //  {
@@ -75,17 +66,30 @@ namespace Client
             //      }
             //  }
 
-            ClientLogger.Init();
-            // the test one
-            ClientLogger.Log("the test ");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("      ____  _     _  ____  __  _  _____ \n    / (__`| |__ | || ===||   | ||_   _|\n     ____)|____||_||____||_| __|  |_|  ");
-            Console.ResetColor();
+            // add loading mod here
+            Mods.Add(new ButtonConfiguration());
+            Mods.Add(new JoinNotifier());
+            Mods.Add(new Fly());
+            Mods.Add(new Say());
 
-            Console.WriteLine("Client Loaded");
 
             MelonCoroutines.Start(FindUI());
 
+
+            foreach (ClientAPI mod in Mods)
+            {
+                ClientLogger.Log($"{mod.ModName} loaded!");
+                mod.OnEarlierStart();
+            }
+
+            ClientLogger.Init();
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("\n\n\n      ____  _     _  ____  __  _  _____ \n    / (__`| |__ | || ===||   | ||_   _|\n     ____)|____||_||____||_| __|  |_|  ");
+            Console.WriteLine("\n\n\n?? Client loaded. thanks for monkey/blaze/keafy\n\n\n\n\n\n");
+            Console.ResetColor();
+
+            NetworkManagerHooks.OnJoin += NetworkManagerHooks_OnJoin;
+            NetworkManagerHooks.OnLeave += NetworkManagerHooks_OnLeave;
 
         }
 

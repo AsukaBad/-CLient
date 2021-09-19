@@ -15,7 +15,7 @@ namespace Client.Modules
     {
         public override void OnStart()
         {
-            Console.WriteLine("thisisloaded.somaybeidk");
+            Console.WriteLine("ClientAPI is good at workin now ! (debug message)");
         }
     }
 }

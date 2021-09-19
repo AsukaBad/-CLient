@@ -41,6 +41,7 @@
     <Compile Include="API\NetworkManagerHooks.cs" />
     <Compile Include="API\PlayerExtensions.cs" />
     <Compile Include="API\VRChatAPIObjects.cs" />
+    <Compile Include="Modules\Buttons.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Modules\JoinNotice.cs" />
     <Compile Include="Modules\TEST.cs" />
