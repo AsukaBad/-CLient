@@ -49,9 +49,10 @@ namespace Client
 
         public override void OnApplicationStart()
         {
-
-            Mods.Add(new VRCMinus());
             Mods.Add(new JoinNotifier());
+            Mods.Add(new Fly());
+            Mods.Add(new Say());
+
 
             foreach (ClientAPI mod in Mods)
             {
@@ -77,18 +78,23 @@ namespace Client
             ClientLogger.Init();
             // the test one
             ClientLogger.Log("the test ");
-
-            MelonCoroutines.Start(CheckUIManager());
-
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("      ____  _     _  ____  __  _  _____ \n    / (__`| |__ | || ===||   | ||_   _|\n     ____)|____||_||____||_| __|  |_|  ");
             Console.ResetColor();
 
             Console.WriteLine("Client Loaded");
 
+            MelonCoroutines.Start(FindUI());
+
 
         }
 
+        private IEnumerator FindUI()
+        {
+            while (VRCUiManager.prop_VRCUiManager_0 == null) yield return null;
+            VRCUI();
+            yield break;
+        }
 
 
         private void NetworkManagerHooks_OnJoin(VRC.Player player)
@@ -103,13 +109,13 @@ namespace Client
                 mod.OnPlayerLeave(player);
         }
 
-        private IEnumerator CheckUIManager()
+
+        public void VRCUI()
         {
-            while (VRCUiManager.prop_VRCUiManager_0 == null) { yield return null; }
             foreach (ClientAPI mod in Mods)
-            mod.OnStart();
+                mod.OnStart();
         }
-          
+
 
         public override void OnUpdate()
         {

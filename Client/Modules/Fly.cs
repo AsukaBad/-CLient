@@ -11,9 +11,11 @@ using Client.API;
 
 namespace Client.Modules
 {
-    class Fly : MonoBehaviour
+    public class Fly : ClientAPI
     {
-        public void OnUpdate()
+        public override string ModName => "Flying";
+
+        public override void OnUpdate()
         {
             if (!PlayerExtensions.IsInWorld() && flying)
             {

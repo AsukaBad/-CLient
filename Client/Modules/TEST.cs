@@ -7,12 +7,13 @@ using UnhollowerBaseLib;
 using UnityEngine;
 using VRC.SDKBase;
 using MelonLoader;
+using Client.API;
 
 namespace Client.Modules
 {
-    class Say : MonoBehaviour
+    class Say : ClientAPI
     {
-        public void OnApplicationStart()
+        public override void OnStart()
         {
             Console.WriteLine("thisisloaded.somaybeidk");
         }
