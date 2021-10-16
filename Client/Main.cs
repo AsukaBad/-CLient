@@ -71,6 +71,9 @@ namespace Client
             Mods.Add(new JoinNotifier());
             Mods.Add(new Fly());
             Mods.Add(new Say());
+            Mods.Add(new Simples());
+
+
 
 
             MelonCoroutines.Start(FindUI());

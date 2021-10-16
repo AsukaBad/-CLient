@@ -10,6 +10,7 @@ using UnityEngine.Events;
 using VRC.UI;
 
 namespace RubyButtonAPI
+
 {
     //Credits:
     //Emilia - Porting it to MelonLoader and helping to keep the git updated

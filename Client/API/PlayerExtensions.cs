@@ -382,5 +382,7 @@ namespace Client.API
         }
 
         private static VRC_EventHandler handler;
+
+
     }
 }

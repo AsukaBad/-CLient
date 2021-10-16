@@ -30,5 +30,9 @@ namespace Client.API
         public virtual void OnPlayerWarned(Player moderator, Player warned) { }
         public virtual void OnPlayerMicOff(Player moderator, Player target) { }
         //public static bool IsClientDev(this APIUser player) { return player.id == "usr_432e9bba-d82c-4d4e-ac26-b306fb56a9c3"; }
+
+        public static ApiWorld Current_World { get { return RoomManager.field_Internal_Static_ApiWorld_0; } }
+
+        public static string Current_World_ID { get { return $"{Current_World.id}"; } }
     }
 }

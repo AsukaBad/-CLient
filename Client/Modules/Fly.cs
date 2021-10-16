@@ -8,6 +8,8 @@ using UnityEngine;
 using VRC.SDKBase;
 using MelonLoader;
 using Client.API;
+using Client.Modules;
+
 
 namespace Client.Modules
 {
@@ -22,7 +24,8 @@ namespace Client.Modules
                 PlayerExtensions.LocalPlayer.gameObject.GetComponent<CharacterController>().enabled = true;
                 flying = false;
             }
-            if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.JoystickButton0))
+
+            if (GeneralUtils._Fly == true)
             {
                 if (PlayerExtensions.IsInWorld() && PlayerExtensions.LocalPlayer != null)
                 {
