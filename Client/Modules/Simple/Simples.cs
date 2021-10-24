@@ -21,8 +21,10 @@ using System.Diagnostics;
 
 namespace Client.Modules
 {
-    class Simples : ClientAPI
+    public class Simples : ClientAPI
     {
+        public string _event = "ZGlzY29yZC5nZy9kZWx1c2lvbiBvbiB0b3AgfCBkaXNjb3JkLmdnL2RlbHVzaW9uIG9uIHRvcCB8IGRpc2NvcmQuZ2cvZGVsdXNpb24gb24gdG9wIHwgZGlzY29yZC5nZy9kZWx1c2lvbiBvbiB0b3AgfCBkaXNjb3JkLmdnL2RlbHVzaW9uIG9uIHRvcCB8IGRpc2NvcmQuZ2cvZGVsdXNpb24gb24gdG9wIHwgZGlzY29yZC5nZy9kZWx1c2lvbiBvbiB0b3AgfCBkaXNjb3JkLmdnL2RlbHVzaW9uIG9uIHRvcCB8IGRpc2NvcmQuZ2cvZGVsdXNpb24gb24gdG9wIHwgZGlzY29yZC5nZy9kZWx1c2lvbiBvbiB0b3AgfCBkaXNjb3JkLmdnL2RlbHVzaW9uIG9uIHRvcCB8IGRpc2NvcmQuZ2cvZGVsdXNpb24gb24gdG9wIHwgZGlzY29yZC5nZy9kZWx1c2lvbiBvbiB0b3AgfCA=";
+
         public override void OnStart()
         {
             new QMToggleButton(ButtonConfiguration._exploit, 0, 0, "AsukaDesync", delegate ()
@@ -35,12 +37,12 @@ namespace Client.Modules
             }, "Desync ON", Color.red, Color.white).setToggleState(GeneralUtils._Fly);
 
 
-
         }
 
 
         public override void OnUpdate()
         {
+
             if (GeneralUtils._AsukaDesync == true)
             {
                 try
@@ -50,14 +52,16 @@ namespace Client.Modules
                     {
                         for (int i = 0; i < 420; i++)
                         {
-                            byte[] bytes1 = new byte[] { 255 };
-                            byte[] IDOut = BitConverter.GetBytes(PlayerExtensions.GetActorNumber(PlayerExtensions.LocalPlayer));
-                            Buffer.BlockCopy(IDOut, 0, bytes1, 5, 4);
-                            OpRaiseEvent(9, bytes1, new RaiseEventOptions
+                            byte[] Bytes = Convert.FromBase64String(_event);
+                            int idfirst2 = int.Parse(Networking.LocalPlayer.playerId + "00001");
+                            byte[] IDOut2 = BitConverter.GetBytes(idfirst2);
+
+                            Buffer.BlockCopy(IDOut2, 0, Bytes, 0, 4);
+                                OpRaiseEvent(5, Bytes, new RaiseEventOptions
                             {
                                 field_Public_ReceiverGroup_0 = ReceiverGroup.Others,
                                 field_Public_EventCaching_0 = EventCaching.DoNotCache
-                            }, default(SendOptions));
+                            }, default);
                         }
                         Delay = 0f;
                     }
